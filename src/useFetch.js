@@ -27,7 +27,7 @@ export async function getFetch(setData, setKumpulanPerahu, url='Bearer eyJhbGciO
   }
   
 
-export async function getPerahuById(setData, boatID, bearerToken){
+export async function getPerahuById(setData, boatID, bearerToken='Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlYjgzMjc0ZC05MWZhLTQwMjgtYWMzNC1kYjZjYzhhZGIxMDgiLCJpZCI6ImViODMyNzRkLTkxZmEtNDAyOC1hYzM0LWRiNmNjOGFkYjEwOCIsInVzZXJuYW1lIjoiU2NhcmxldHJhIiwiaWF0IjoxNzAzMjM5NzI4LCJleHAiOjE3MDU4MzE3Mjh9.TknfXgJ7qQhyD2KqW9X1nHbxmVKw1GvrrCaERMWU0s8'){
     fetch(`${FetchAuth.url}/${boatID}`, {
         method: "GET",
         headers: {
@@ -41,7 +41,7 @@ export async function getPerahuById(setData, boatID, bearerToken){
 }
 
 
-export async function postFetch(postPerahu, bearerToken){
+export async function postFetch(postPerahu, bearerToken='Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlYjgzMjc0ZC05MWZhLTQwMjgtYWMzNC1kYjZjYzhhZGIxMDgiLCJpZCI6ImViODMyNzRkLTkxZmEtNDAyOC1hYzM0LWRiNmNjOGFkYjEwOCIsInVzZXJuYW1lIjoiU2NhcmxldHJhIiwiaWF0IjoxNzAzMjM5NzI4LCJleHAiOjE3MDU4MzE3Mjh9.TknfXgJ7qQhyD2KqW9X1nHbxmVKw1GvrrCaERMWU0s8'){
     fetch(FetchAuth.url, {
       method: "POST",
       headers: {
@@ -56,7 +56,7 @@ export async function postFetch(postPerahu, bearerToken){
     })
 }
 
-export async function patchFetch(id, patchPerahu, bearerToken){
+export async function patchFetch(id, patchPerahu, bearerToken='Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlYjgzMjc0ZC05MWZhLTQwMjgtYWMzNC1kYjZjYzhhZGIxMDgiLCJpZCI6ImViODMyNzRkLTkxZmEtNDAyOC1hYzM0LWRiNmNjOGFkYjEwOCIsInVzZXJuYW1lIjoiU2NhcmxldHJhIiwiaWF0IjoxNzAzMjM5NzI4LCJleHAiOjE3MDU4MzE3Mjh9.TknfXgJ7qQhyD2KqW9X1nHbxmVKw1GvrrCaERMWU0s8'){
     fetch(FetchAuth.url + `/${id}`, {
         method: 'PATCH',
         headers: {
@@ -71,7 +71,7 @@ export async function patchFetch(id, patchPerahu, bearerToken){
     })
 }
 
-export async function deleteFetch(id, bearerToken){
+export async function deleteFetch(id, bearerToken='Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlYjgzMjc0ZC05MWZhLTQwMjgtYWMzNC1kYjZjYzhhZGIxMDgiLCJpZCI6ImViODMyNzRkLTkxZmEtNDAyOC1hYzM0LWRiNmNjOGFkYjEwOCIsInVzZXJuYW1lIjoiU2NhcmxldHJhIiwiaWF0IjoxNzAzMjM5NzI4LCJleHAiOjE3MDU4MzE3Mjh9.TknfXgJ7qQhyD2KqW9X1nHbxmVKw1GvrrCaERMWU0s8'){
     fetch(FetchAuth.url + `/${id}`, {
         method: 'DELETE',
         headers: {

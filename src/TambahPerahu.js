@@ -1,48 +1,52 @@
 import { useState } from 'react';
-
-const colors = ['Red', 'Blue', 'Green', 'Yellow']; // Enum-like list of colors
+import { postFetch } from './useFetch';
+import { useNavigate } from "react-router";
+const colors = ["RED",
+"ORANGE",
+"YELLOW",
+"GREEN",
+"BLUE",
+"INDIGO",
+"VIOLET",
+"WHITE",
+"BLACK"
+]
 
 const TambahPerahu = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    capacity: '',
-    color: '',
-  });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const navigate = useNavigate();
+  const [namaPerahu, setNama] = useState('')
+  const [kapasitasPerahu, setKapasitas] = useState(5)
+  const [deskripsiPerahu, setDeskripsi] = useState('')
+  const [warnaPerahu, setWarna] = useState('ORANGE')
+  const [isSailing, setStatus] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your form submission logic here using the formData state
-    console.log(formData);
+    const perahu = {name: namaPerahu, capacity: kapasitasPerahu, description: deskripsiPerahu, color: warnaPerahu, is_sailing: isSailing}
+    postFetch(perahu)
+    navigate('/')
   };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '20px', margin: '20px' }}>
-      <form id="form" onsubmit={handleSubmit} style={{ width: '50vh', height: '50vh'}}>
+      <form id="form" onSubmit={handleSubmit} style={{ width: '50vh', height: '50vh'}}>
         <div style={{ margin: '3' }}>
             <div className="mb-3">
                 <label for="name" className="col-form-label">Name:</label>
-                <input type="text" className="form-control" value={formData.name} onChange={handleChange} name="name"></input>
+                <input type="text" required className="form-control" value={namaPerahu} onChange={(e) => setNama(e.target.value)} name="name"></input>
             </div>
             <div className="mb-3">
-                <label for="kapasitas" className="col-form-label">Kapasitas: </label>
-                <input type="number" className="form-control" value={formData.capacity} onChange={handleChange} name="kapasitas"></input>
+                <label for="capacity" className="col-form-label">Kapasitas: </label>
+                <input type="number" required className="form-control" value={kapasitasPerahu} onChange={(e) => setKapasitas(e.target.value)} name="capacity"></input>
             </div>
             <div className="mb-3">
                 <label for="description" className="col-form-label">Description:</label>
-                <textarea className="form-control" value={formData.description} onChange={handleChange} name="description"></textarea>
+                <textarea className="form-control" required value={deskripsiPerahu} onChange={(e) => setDeskripsi(e.target.value)} name="description"></textarea>
             </div>
             <label>Color: </label>
-            <select name="color" value={formData.color} onChange={handleChange} style={{ color: 'black' }}>
-                <option value="" disabled>
+            <select name="color" value={warnaPerahu} onChange={(e) => setWarna(e.target.value)} style={{ color: 'black' }}>
+                <option value="" disabled >
                 Select a color
                 </option>
                 {colors.map((color) => (
