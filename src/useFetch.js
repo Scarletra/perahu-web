@@ -3,20 +3,29 @@ export const FetchAuth = {
     bearerToken: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlYjgzMjc0ZC05MWZhLTQwMjgtYWMzNC1kYjZjYzhhZGIxMDgiLCJpZCI6ImViODMyNzRkLTkxZmEtNDAyOC1hYzM0LWRiNmNjOGFkYjEwOCIsInVzZXJuYW1lIjoiU2NhcmxldHJhIiwiaWF0IjoxNzAzMjM5NzI4LCJleHAiOjE3MDU4MzE3Mjh9.TknfXgJ7qQhyD2KqW9X1nHbxmVKw1GvrrCaERMWU0s8'
 }
 
-export async function getFetch(setData, url='Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlYjgzMjc0ZC05MWZhLTQwMjgtYWMzNC1kYjZjYzhhZGIxMDgiLCJpZCI6ImViODMyNzRkLTkxZmEtNDAyOC1hYzM0LWRiNmNjOGFkYjEwOCIsInVzZXJuYW1lIjoiU2NhcmxldHJhIiwiaWF0IjoxNzAzMjM5NzI4LCJleHAiOjE3MDU4MzE3Mjh9.TknfXgJ7qQhyD2KqW9X1nHbxmVKw1GvrrCaERMWU0s8'){
-    fetch(FetchAuth.url, {
+export async function getFetch(setData, setKumpulanPerahu, url='Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlYjgzMjc0ZC05MWZhLTQwMjgtYWMzNC1kYjZjYzhhZGIxMDgiLCJpZCI6ImViODMyNzRkLTkxZmEtNDAyOC1hYzM0LWRiNmNjOGFkYjEwOCIsInVzZXJuYW1lIjoiU2NhcmxldHJhIiwiaWF0IjoxNzAzMjM5NzI4LCJleHAiOjE3MDU4MzE3Mjh9.TknfXgJ7qQhyD2KqW9X1nHbxmVKw1GvrrCaERMWU0s8') {
+    try {
+      const res = await fetch(FetchAuth.url, {
         method: "GET",
         headers: {
-        "Content-type": "application/json",
-        Authorization: url
-        }}).then(res => {
-            if (res.status == 200){
-                return res.json()
-            }
-        }).then(data => {
-            setData(data.daftarPerahu)
-        })
-}
+          "Content-type": "application/json",
+          Authorization: url,
+        },
+      });
+  
+      if (res.ok) {
+        const data = await res.json()
+        setData(data.daftarPerahu)
+        setKumpulanPerahu(data.daftarPerahu)
+        console.log("Data perahu: ", data)
+      } else {
+        throw new Error(`Failed to fetch data: ${res.status}`);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
 
 export async function getPerahuById(setData, boatID, bearerToken){
     fetch(`${FetchAuth.url}/${boatID}`, {

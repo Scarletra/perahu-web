@@ -8,9 +8,10 @@ import { getFetch } from './useFetch';
 
 function App() {
   const [kumpulanPerahu, setDataPerahu] = useState([''])
+  const [dataPerahu, setKumpulanPerahu] = useState([])
 
   useEffect(() => {
-      getFetch(setDataPerahu)
+      getFetch(setDataPerahu, setKumpulanPerahu)
     }, [])
 
 
